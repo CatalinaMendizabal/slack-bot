@@ -3,7 +3,7 @@ import schedule
 import time
 import logging
 
-from flask.cli import load_dotenv
+from dotenv import load_dotenv
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
@@ -35,10 +35,13 @@ if __name__ == "__main__":
     # Send the message to every member of the Slack organization
     members = slack_client.users_list().get("members")
 
-    msg = "Good Morning!"
+    msg = "" \
+          "Hola Bella Team! @aquí " \
+          "\n Recuerden cargar todas las horas que estuvieron trabajando en JIRA :rezo: " \
+          "\n !!!Muchas Gracias!" \
+          ""
 
-    schedule.every(5).seconds.do(lambda: send_message(slack_client, msg, members))
-    # schedule.every().friday.at("13:00").do(lambda: sendMessage(slack_client, msg))
+    schedule.every().friday.at("12:00").do(lambda: send_message(slack_client, msg, members))
 
     logging.info("entering loop")
 
